@@ -61,10 +61,17 @@ ol.parts li { counter-increment: p; padding: 10px 0; border-bottom: 1px solid va
 ol.parts li:last-child { border-bottom: 0; }
 ol.parts li::before { content: "بخش " counter(p, persian); color: var(--saffron); font-weight: 600; white-space: nowrap; min-width: 5.5em; }
 
+.cover-img { width: 100%; max-width: 260px; height: auto; display: block; border: 1px solid var(--saffron); }
+.author-box { display: grid; grid-template-columns: 170px 1fr; gap: 28px; align-items: center; background: rgba(13, 27, 34, .65); padding: 20px 24px; border-inline-start: 3px solid var(--saffron); }
+.author-box img { width: 100%; height: auto; display: block; }
+.author-box h3 { font-size: 1.2rem; font-weight: 800; }
+.author-box p { color: var(--dim); margin-top: 6px; }
+@media (max-width: 560px) { .author-box { grid-template-columns: 1fr; } .author-box img { max-width: 200px; } }
+
 footer { border-top: 1px solid var(--line); margin-top: 48px; padding: 28px 0 40px; color: var(--dim); font-size: .9rem; background: rgba(13, 27, 34, .72); }
 @media (max-width: 680px) {
   .book { grid-template-columns: 1fr; gap: 32px; padding-top: 40px; }
-  .cover { max-width: 260px; margin: 0 auto; width: 100%; }
+  .cover-img { margin: 0 auto; }
   nav ul { gap: 16px; }
   dl { grid-template-columns: 1fr; gap: 0; }
   dd { margin-bottom: 8px; }
@@ -90,10 +97,7 @@ footer { border-top: 1px solid var(--line); margin-top: 48px; padding: 28px 0 40
 
 <main class="wrap">
   <div class="book">
-    <div class="cover" aria-hidden="true">
-      <div class="t">دومین نفر<br>از من</div>
-      <div class="a">جبار شفیعی<br>(چیاگوران دالاهو)</div>
-    </div>
+    <img class="cover-img" src="images/book-cover.jpg" alt="جلد کتاب دومین نفر از من: چهره‌ای نیمی سفید و نیمی سیاه روی زمینهٔ چرمی قرمز">
 
     <div class="info">
       <h1>دومین نفر از من</h1>
@@ -106,6 +110,17 @@ footer { border-top: 1px solid var(--line); margin-top: 48px; padding: 28px 0 40
       <p class="small">فایل PDF، ۸۵ صفحه، حدود ۵۵۰ کیلوبایت</p>
     </div>
   </div>
+
+  <section>
+    <h2>دربارهٔ نویسنده</h2>
+    <div class="author-box">
+      <img src="images/author.jpg" alt="جبار شفیعی (چیاگوران دالاهو)" loading="lazy">
+      <div>
+        <h3>جبار شفیعی (چیاگوران دالاهو)</h3>
+        <p>شاعر و نویسنده. اشعار فارسی و کردی و کتاب «دومین نفر از من» در این وب‌سایت منتشر شده است.</p>
+      </div>
+    </div>
+  </section>
 
   <section>
     <h2>مشخصات کتاب</h2>
@@ -139,55 +154,6 @@ footer { border-top: 1px solid var(--line); margin-top: 48px; padding: 28px 0 40
   <div class="wrap">© ۱۴۰۴ جبار شفیعی (چیاگوران دالاهو)، تمامی حقوق محفوظ است</div>
 </footer>
 
-<script>
-(function () {
-  var c = document.getElementById('bg');
-  var x = c.getContext('2d');
-  var w = 0, h = 0, pts = [];
-  var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var NET = '111,183,168';
-  function resize() {
-    var d = window.devicePixelRatio || 1;
-    w = window.innerWidth; h = window.innerHeight;
-    c.width = w * d; c.height = h * d;
-    x.setTransform(d, 0, 0, d, 0, 0);
-    var n = Math.min(90, Math.floor(w * h / 14000));
-    pts = [];
-    for (var i = 0; i < n; i++) {
-      pts.push({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - .5) * .4, vy: (Math.random() - .5) * .4 });
-    }
-    if (still) draw();
-  }
-  function draw() {
-    x.clearRect(0, 0, w, h);
-    var i, j, a, b, d;
-    for (i = 0; i < pts.length; i++) {
-      a = pts[i];
-      if (!still) {
-        a.x += a.vx; a.y += a.vy;
-        if (a.x < 0 || a.x > w) a.vx *= -1;
-        if (a.y < 0 || a.y > h) a.vy *= -1;
-      }
-    }
-    for (i = 0; i < pts.length; i++) {
-      a = pts[i];
-      x.fillStyle = 'rgba(' + NET + ',.85)';
-      x.beginPath(); x.arc(a.x, a.y, 2, 0, 6.283); x.fill();
-      for (j = i + 1; j < pts.length; j++) {
-        b = pts[j];
-        d = Math.hypot(a.x - b.x, a.y - b.y);
-        if (d < 140) {
-          x.strokeStyle = 'rgba(' + NET + ',' + ((1 - d / 140) * .35) + ')';
-          x.beginPath(); x.moveTo(a.x, a.y); x.lineTo(b.x, b.y); x.stroke();
-        }
-      }
-    }
-    if (!still) requestAnimationFrame(draw);
-  }
-  window.addEventListener('resize', resize);
-  resize();
-  if (!still) draw();
-})();
-</script>
+<script src="bg.js"></script>
 </body>
 </html>

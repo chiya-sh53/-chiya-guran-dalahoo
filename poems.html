@@ -1,106 +1,364 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اشعار | Chiya Guran Dalahoo</title>
-    <meta name="description" content="مجموعه اشعار شخصی">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="اشعار جبار شفیعی (چیاگوران دالاهو)">
+<title>اشعار | Chiya Guran Dalahoo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&family=Noto+Naskh+Arabic:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0d1b22;
+  --mist: #d8e8e4;
+  --dim: #9db4b0;
+  --saffron: #e6b95f;
+  --line: rgba(216, 232, 228, .22);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--ink); scroll-padding-top: 80px; scroll-behavior: smooth; }
+body { font-family: "Vazirmatn", Tahoma, "Segoe UI", sans-serif; color: var(--mist); line-height: 1.9; background: transparent; min-height: 100vh; }
+#bg { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; display: block; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--saffron); outline-offset: 4px; }
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+header { border-bottom: 1px solid var(--line); background: rgba(13, 27, 34, .72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); position: sticky; top: 0; z-index: 5; }
+header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 14px; padding-bottom: 14px; }
+.brand { font-weight: 800; font-size: 1.1rem; letter-spacing: .02em; direction: ltr; }
+nav ul { list-style: none; display: flex; gap: 22px; }
+nav a { color: var(--dim); padding: 4px 0; border-bottom: 2px solid transparent; }
+nav a:hover, nav a[aria-current="page"] { color: var(--mist); border-bottom-color: var(--saffron); }
+
+.page-title { padding: 64px 0 16px; }
+.page-title h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 800; }
+.page-title p { color: var(--dim); margin-top: 8px; }
+
+.toc { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 8px 0 24px; padding: 14px 18px; background: rgba(13, 27, 34, .65); border-top: 2px solid var(--saffron); }
+.toc a { color: var(--mist); }
+.toc a:hover { color: var(--saffron); }
+
+.poem { border-inline-start: 3px solid var(--saffron); padding: 14px 24px 20px; margin: 28px 0 48px; background: rgba(13, 27, 34, .65); }
+.poem h2 { font-size: 1.4rem; font-weight: 800; }
+.meta { color: var(--dim); font-size: .9rem; margin-bottom: 14px; }
+.verse { font-family: "Noto Naskh Arabic", "Vazirmatn", serif; font-size: 1.3rem; line-height: 2.4; margin-top: 14px; }
+.poet { margin-top: 18px; color: var(--dim); font-size: .95rem; }
+
+figure { margin: 24px 0 0; }
+figure img { display: block; width: 100%; max-width: 420px; height: auto; }
+figcaption { margin-top: 8px; font-size: .9rem; color: var(--dim); }
+figcaption a { color: var(--saffron); font-weight: 600; }
+figcaption a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+footer { border-top: 1px solid var(--line); margin-top: 48px; padding: 28px 0 40px; color: var(--dim); font-size: .9rem; background: rgba(13, 27, 34, .72); }
+@media (max-width: 560px) { nav ul { gap: 16px; } .poem { padding-inline: 16px; } .verse { font-size: 1.2rem; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
 </head>
 <body>
-    <header>
-        <div class="nav-container">
-            <a href="index.html" class="logo">Chiya <span>Guran</span> Dalahoo</a>
-            <button class="menu-toggle" aria-label="منو">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav>
-                <ul id="nav-menu">
-                    <li><a href="index.html">خانه</a></li>
-                    <li><a href="poems.html" class="active">اشعار</a></li>
-                    <li><a href="writings.html">نوشته‌ها</a></li>
-                    <li><a href="book.html">کتاب</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<canvas id="bg" aria-hidden="true"></canvas>
 
-    <main>
-        <div class="section-title">
-            <h2>اشعار</h2>
-            <p>مجموعه‌ای از سروده‌های من — هر شعر داستانی از دل است</p>
-        </div>
+<header>
+  <div class="wrap">
+    <a class="brand" href="index.html">Chiya Guran Dalahoo</a>
+    <nav aria-label="منوی اصلی">
+      <ul>
+        <li><a href="index.html">خانه</a></li>
+        <li><a href="poems.html" aria-current="page">اشعار</a></li>
+        <li><a href="writings.html">نوشته‌ها</a></li>
+        <li><a href="book.html">کتاب</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-        <div class="item-list">
-            <div class="item" id="poem1">
-                <h3>در خلوت شب</h3>
-                <div class="meta">شعر نو · آبان ۱۴۰۳</div>
-                <div class="excerpt">
-                    شب که فرو می‌نشیند بر شانه‌های شهر<br>
-                    من هنوز بیدارم با کلماتی که نمی‌دانند کجا بروند<br><br>
-                    پنجره باز است و باد حرف‌هایش را<br>
-                    روی کاغذهای سفیدم می‌نویسد<br>
-                    من فقط تماشا می‌کنم<br>
-                    و گاهی خطی را پاک می‌کنم<br>
-                    که بیش از حد صادق بوده است
-                </div>
-            </div>
+<main class="wrap">
+  <div class="page-title">
+    <h1>اشعار</h1>
+    <p>مجموعه‌ای از اشعار فارسی و کردی</p>
+  </div>
 
-            <div class="item" id="poem2">
-                <h3>برگ‌های پاییزی</h3>
-                <div class="meta">غزل · مهر ۱۴۰۳</div>
-                <div class="excerpt">
-                    برگ‌ها می‌رقصند در باد پاییزی<br>
-                    و من هنوز منتظرم که بهاری بیاید<br>
-                    که رنگ‌ها دوباره زنده شوند<br>
-                    و دل من از این سردی رها گردد<br><br>
-                    ای باد، پیغامی ببر از من<br>
-                    به آن سو که هنوز سبز است جهان
-                </div>
-            </div>
+  <ul class="toc" aria-label="فهرست اشعار">
+    <li><a href="#sigar">مثل سیگار</a></li>
+    <li><a href="#man-o-u">من و او</a></li>
+    <li><a href="#khaterat">خاطراتت</a></li>
+    <li><a href="#zhian">من و ژیان (کردی)</a></li>
+    <li><a href="#poem1">در خلوت شب</a></li>
+    <li><a href="#parde-del">پردهٔ دل</a></li>
+    <li><a href="#chol-oshk">چل ۆشک (کردی)</a></li>
+    <li><a href="#poem3">گل حسرت</a></li>
+  </ul>
 
-            <div class="item">
-                <h3>سایه و نور</h3>
-                <div class="meta">شعر آزاد · شهریور ۱۴۰۳</div>
-                <div class="excerpt">
-                    بین سایه و نور ایستاده‌ام<br>
-                    نه کاملاً در تاریکی<br>
-                    نه کاملاً در روشنایی<br>
-                    فقط جایی که کلمات<br>
-                    هنوز معنا دارند
-                </div>
-            </div>
+  <!-- برای افزودن شعر جدید، یک بخش article کامل را کپی کنید، id و متن را عوض کنید و یک خط هم به فهرست بالا اضافه کنید -->
 
-            <div class="item">
-                <h3>نامه‌ای به خودم</h3>
-                <div class="meta">شعر نو · مرداد ۱۴۰۳</div>
-                <div class="excerpt">
-                    به خودم می‌نویسم:<br>
-                    نترس از کاغذ سفید<br>
-                    نترس از سکوتی که بعد از نقطه می‌آید<br>
-                    فقط بنویس<br>
-                    حتی اگر هیچ‌کس نخواند
-                </div>
-            </div>
-        </div>
+  <article class="poem" id="sigar">
+    <h2>مثل سیگار</h2>
+    <p class="verse">
+      مثل سیگار روی لبم، هم‌دَمم بوسه‌هایم باش<br>
+      مرا بکُش ذره‌ذره، اما تو فقط اجلم باش<br>
+      خطرناک‌ترین هم‌دمِ لحظه‌هایم دانم تویی<br>
+      تا آخرین نفس‌هایم، هم‌نَفَسِ بغض من باش<br>
+      مثل دودِ تلخِ شب‌ها، آغشته به رگ‌هایم باش<br>
+      بسوزم، ز سوختنم هنوز تو شعلهٔ من باش<br>
+      زهرِ شیرینِ تلخِ روزگار، قهوهٔ تلخ‌کامِ من باش<br>
+      چو تو خاکستر شوم، آتشِ زیر خاکسترم باش<br>
+      چو آتشی که آرام می‌سوزاندم هر لحظه<br>
+      جانم را بگیر، لیک رفیقِ جانانهٔ من باش<br>
+      مثل دود در جانم رخنه کن، همراهِ هر نفس<br>
+      بسوزان، سیاه کن، لیک خاکسترم باش<br>
+      یک جرعه از می‌ات بنوشم، تو مزهٔ تلخِ لبم باش<br>
+      دودِ فراقت ز آتشِ نَفسم بر چشم می‌رود<br>
+      اشک ببارد ز چشم، تو خود گریهٔ من باش<br>
+      گر غافل شوم از تو، غرقِ هزار خیال شوم<br>
+      آتشِ سوختنت رسد بر پوستم، باز مرهمم باش<br>
+      مثل زخمی که هر شب عمیق‌تر می‌شود<br>
+      دردت را بنوشم، درمانِ دردِ منِ بیمار باش<br>
+      تا آخرین قطرهٔ خونم سیاه شود از دود<br>
+      تو همان سمِّ شیرینِ لحظه‌هایم باش
+    </p>
+    <p class="poet">جبار شفیعی (چیاگوران دالاهو)</p>
+  </article>
 
-        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: var(--bg-secondary); border-radius: var(--radius);">
-            <p style="color: var(--text-soft); margin-bottom: 1rem;">
-                <i class="fas fa-info-circle"></i>
-                این اشعار نمونه هستند. شما می‌توانید اشعار خودتان را جایگزین کنید.
-            </p>
-            <p style="font-size: 0.95rem; color: var(--text-soft);">
-                برای افزودن شعر جدید، کافی است بخش‌های مشابه را در فایل <code>poems.html</code> کپی و ویرایش کنید.
-            </p>
-        </div>
-    </main>
+  <article class="poem" id="man-o-u">
+    <h2>من و او</h2>
+    <p class="verse">
+      من و او…<br>
+      کنار هم<br>
+      هنوز نشسته‌ایم،<br>
+      چند هیزم خشکِ<br>
+      سرخ‌شده<br>
+      آهسته می‌سوزند،<br>
+      در میانِ رقصِ شعله
+    </p>
+    <p class="verse">
+      کتری سیاه روی آتش<br>
+      از جوششِ درونش می‌نوازد<br>
+      سازِ مه‌گرفتهٔ سوختن را
+    </p>
+    <p class="verse">
+      یک فنجان چای<br>
+      سرد شده،<br>
+      بین ما<br>
+      و ما؛ هنوز<br>
+      کنار هم نشسته‌ایم<br>
+      «من و تنهاییِ…»
+    </p>
+    <p class="verse">
+      دو گوشه‌گیر در کنجِ<br>
+      میانِ زمین و آسمان<br>
+      چه شلوغ است!<br>
+      خیالمان<br>
+      در این سکوتِ شبِ تنهایی
+    </p>
+    <p class="verse">
+      انگار حرف‌های نگفته<br>
+      می‌رقصند در سکوت<br>
+      به دورِ آتش و شعله<br>
+      و ما نظاره‌گرِ هم<br>
+      در بهت و سکوت
+    </p>
+    <p class="poet">جبار شفیعی (چیاگوران دالاهو)</p>
+  </article>
 
-    <footer>
-        <p>© ۱۴۰۳ · Chiya Guran Dalahoo</p>
-        <p>تمامی حقوق محفوظ است</p>
-    </footer>
+  <article class="poem" id="khaterat">
+    <h2>خاطراتت</h2>
+    <p class="verse">
+      هنوز؛<br>
+      نسیم خاطراتت<br>
+      می‌وزد<br>
+      از لابه‌لای پنجرهٔ<br>
+      چشمانم<br>
+      شبنم صبح سحر<br>
+      مانده<br>
+      بر بالین خیسم<br>
+      هجوم خیالت<br>
+      هم‌نشینِ<br>
+      شب‌زنده‌داری‌هایم<br>
+      می‌بارد اشک<br>
+      چو باران، بر سر و بالینم
+    </p>
+    <p class="verse">
+      نمی‌دانم؛<br>
+      آن‌قدر دور گشتی<br>
+      که شبی هم نمی‌آیی به خوابم<br>
+      هراسانم از عشق<br>
+      چو کابوس گشته<br>
+      آن‌همه عاشقانه‌هایم<br>
+      چه عهدی‌ست مرا با دل<br>
+      که صدبار بمیرم<br>
+      گر زنده شوم باز<br>
+      تو را جویم<br>
+      تو را خواهم باز
+    </p>
+    <p class="poet">جبار شفیعی (چیاگوران دالاهو)</p>
+  </article>
 
-    <script src="js/main.js"></script>
+  <article class="poem" id="zhian">
+    <h2 lang="ckb">من و ژیان</h2>
+    <p class="meta">کوردی سۆرانی</p>
+    <div lang="ckb" dir="rtl">
+      <p class="verse">
+        من و ژیان،<br>
+        هەردووکمان لە شەڕێکی بێ کۆتاییداین،<br>
+        لە نێوان<br>
+        مان و نەمان.
+      </p>
+      <p class="verse">
+        من<br>
+        بۆ خۆم دەگریم،<br>
+        ئەو<br>
+        بە باران<br>
+        فرمێسکەکانم دەشوات.
+      </p>
+      <p class="verse">
+        من<br>
+        هاوار دەکەم،<br>
+        ئەو<br>
+        بە هەور و بروسکە،<br>
+        دەنگم<br>
+        لە گەردیلەی ئاسماندا<br>
+        دەنوێنێت.
+      </p>
+      <p class="verse">
+        من<br>
+        لە تەنیایی خۆم<br>
+        ئەژنۆم دەگرمە باوەش،<br>
+        ئەو<br>
+        هەورێکی ڕەش<br>
+        بە سەرمدا ساما ڵێت<br>
+        وەک دایکێک<br>
+        کە ماتەمی من دەزانێت.
+      </p>
+      <p class="verse">
+        من<br>
+        لە تاریکی خۆم<br>
+        ون دەبم،<br>
+        ئەو<br>
+        بە تیشکی بروسکە<br>
+        شوێنم<br>
+        بۆ چرکەیەک<br>
+        دەدۆزێتەوە.
+      </p>
+      <p class="verse">
+        من<br>
+        ڕێگا دەگرمە بەرەو کۆتایی،<br>
+        ئەو<br>
+        لافاوێک<br>
+        دەهێنێتە ناو هەنگاوەکانم،<br>
+        تا فێرم بکات<br>
+        ڕووبار<br>
+        لە وەستان نازانێت.
+      </p>
+    </div>
+    <p class="poet">جبار شفیعی (چیاگوران دالاهو)</p>
+  </article>
+
+  <article class="poem" id="poem1">
+    <h2>در خلوت شب</h2>
+    <p class="verse">
+      در خلوت شب، جام می‌گیرم به دست، تلخی کامم، ز هجرانش شکست.<br>
+      لب‌های او، نقش بر لب‌های من، خاطره‌اش شیرین، چون شهد کهن.
+    </p>
+    <p class="verse">
+      همه کاری کردم، تا پای جان، عشقی که سوخت، در دل چون کران.<br>
+      او رفت و ماندم، تنهایم هنوز، جامم رفیق، در این سوز و سوز.
+    </p>
+    <p class="verse">
+      تلخی هجران، چون زهر است و تیز، اما خیالش، شیرین چون پرنیان ریز.<br>
+      مستم کند، از درد آزادم کند، جامم به یادش، دلم شادم کند.
+    </p>
+    <p class="verse">
+      جانم آتش گرفت از عشق تو، آب نشد این احساس سرد تو.<br>
+      من مانده‌ام و باغی ز گل‌های خیالت، تو دور ز من، در حسرت و هجر و ملالت.
+    </p>
+    <p class="verse">
+      مات و مبهوتم از این کار تو، قلبم اسیر آن گیر و دار تو.<br>
+      تا کی کشم این فاصلهٔ سرد و گران؟ از قصد توست این درد در جان و روان.
+    </p>
+    <p class="verse">
+      جامم به دست، غرقم در یاد تو، تلخی هجران، شیرینی فریاد تو.<br>
+      در خلوت خود، با سایه‌ات هم‌نشین، می‌سوزم و می‌سازم، ای عشق دیرین.
+    </p>
+    <p class="verse">
+      من سوی تو ایم هر لحظه دوان دوان<br>
+      تو ز من گریزان هردم چو رودی روان
+    </p>
+    <p class="verse">
+      از تو طلب عشق نمودم، با دل و جان، مانده‌ام چو سالک ز درگهت ای همه جان.<br>
+      احساس قلبت، رازی‌ست پنهان ز من، زین انتظار، که آید جوابی سوخته‌جان من.
+    </p>
+    <p class="verse">
+      بگو، ای یار، چه در آن سینه‌ات داری؟ سکوتت از رضاست، یا شرم داری.<br>
+      یک سخن، یک نگاه، اشاراتی بنما، تا آرام گیرد این دل زین همه تمنا.
+    </p>
+    <p class="poet">جبار شفیعی (چیاگوران دالاهو)</p>
+  </article>
+
+  <article class="poem" id="parde-del">
+    <h2>پردهٔ دل</h2>
+    <p class="verse">
+      گویند گر پردهٔ دل افتد رسوایی عیان شود<br>
+      پس پرده آیینه باشد! در آیینه رخ رسوا عیان شود<br>
+      پرده‌دار دل گر خدا باشد نور در آن عیان شود<br>
+      گر عشق پردهٔ دل گردد جان در آن عیان شود<br>
+      گر دل به معشوق سپاریم او خود در آن عیان شود<br>
+      گر هیچ نماند جز او مانا، همه در هیچ عیان شود<br>
+      چون هیچ شدی ز خود، از تو خویشتن عیان شود<br>
+      در میخانه مست شدی دردست تو جام عیان شود<br>
+      آن جا که ساقی خود مست شود، میِ نابش عیان شود<br>
+      مستیِ بی‌جام و بی‌سبو را جانِ مستان عیان شود<br>
+      گر سر به سجدهٔ فنا نهی سرِّ پنهان عیان شود<br>
+      در مرگ پیش از مرگ جانا مرگِ جان عیان شود<br>
+      آن دم که جان به جانان رسد جانان در جان عیان شود<br>
+      بی‌من و بی‌ما و بی‌تو مانَد آن «هو» تنها عیان شود
+    </p>
+    <p class="poet">جبار شفیعی (چیاگوران دالاهو)</p>
+  </article>
+
+  <article class="poem" id="chol-oshk">
+    <h2 lang="sdh">چل ۆشک</h2>
+    <p class="meta">کوردی کلهری</p>
+    <p class="verse" lang="sdh" dir="rtl">
+      من دویکه ڵی رنجە رۆی چڵ دار ۆشکم<br>
+      بێ بەر و پەل لە ق نەو نمام لەریشە ۆشکم<br>
+      وجود شکیای دە س باخوان یە چۆ ۆشکم<br>
+      رەنج بەردەی زمسان لە فصل وەھار ۆشکم<br>
+      لە ناو کوانێ باخەوان مشتێ زوخال ۆشکم<br>
+      دۆیکەل ماتم ئەرا چەوەیل بی ئەسر ۆشکم<br>
+      سیاە بخت سوزیاێ تاێ کتری و مەشکم<br>
+      زویخ دەرون سوز ھناسەی باخەوان باخ ۆشکم
+    </p>
+    <p class="poet">جبار شفیعی (چیاگوران دالاهو)</p>
+  </article>
+
+  <article class="poem" id="poem3">
+    <h2>گل حسرت</h2>
+    <p class="meta">پاییز</p>
+    <p class="verse">
+      چو گل حسرت، دور مانده ز فصل بهاریم<br>
+      در سوز پاییز سبز گشتیم، در فصل خزانیم<br>
+      ابر می‌خواهیم و باران، چشم‌انتظار بارانیم<br>
+      خیره به آسمان، تشنهٔ یک قطره بارانیم<br>
+      فصل مرگ سبزه‌زار، داغ‌دار فصل بهاریم<br>
+      پروانه در پیله دگر پر نمی‌زند بر این دشت<br>
+      در خواب سرد گلزار، شکوفهٔ بیدار باغیم<br>
+      تنها و پر ز حسرت، بیگانه‌ترین گل خاکیم<br>
+      خزانه پرسه می‌زند جای نسیم در این سرزمین<br>
+      ریشه در خاک، حسرت به دل، زنده‌تر از بهاریم
+    </p>
+    <p class="poet">جبار شفیعی (چیاگوران دالاهو)</p>
+    <figure>
+      <img src="images/autumn-poem.jpeg" alt="گل‌های بنفش پاییزی میان برگ‌های زرد، با متن شعر روی تصویر" loading="lazy">
+      <figcaption><a href="images/autumn-poem.jpeg" download>دانلود تصویر شعر</a></figcaption>
+    </figure>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">© ۱۴۰۴ جبار شفیعی (چیاگوران دالاهو)، تمامی حقوق محفوظ است</div>
+</footer>
+
+<script src="bg.js"></script>
 </body>
 </html>
