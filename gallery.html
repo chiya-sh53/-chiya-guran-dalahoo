@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="تصاویر اشعار جبار شفیعی (چیاگوران دالاهو)">
-<title>تصاویر | Chiya Guran Dalahoo</title>
+<meta name="description" content="تصاویر اشعار چیا شفیعی، جبار شفیعی (چیاگوران دالاهو): شعر روی تصویر، با متن کامل هر شعر">
+<title>تصاویر اشعار چیا شفیعی | Chiya Guran Dalahoo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
@@ -90,6 +90,7 @@ footer { border-top: 1px solid var(--line); margin-top: 48px; padding: 28px 0 40
     <button type="button" id="next">بعدی</button>
     <span class="lb-count" id="count"></span>
     <button type="button" id="prev">قبلی</button>
+    <a id="txt" href="#">متن شعر</a>
     <a id="dl" href="#" download>دانلود</a>
     <button type="button" id="close">بستن</button>
   </div>
@@ -98,12 +99,30 @@ footer { border-top: 1px solid var(--line); margin-top: 48px; padding: 28px 0 40
 <script src="bg.js"></script>
 <script>
 /* ===== فهرست تصاویر =====
-   برای افزودن تصویر جدید: فایل را در پوشهٔ images آپلود کنید
-   و یک خط مثل خطوط زیر به این فهرست اضافه کنید (ویرگول آخر خط یادتان نرود). */
+   برای افزودن تصویر جدید: فایل را در پوشهٔ images آپلود کنید و یک خط مثل خطوط زیر
+   اضافه کنید. id باید یکتا باشد. poem شناسهٔ شعر در poems.html است (اختیاری). */
 var IMAGES = [
-  { src: "images/autumn-poem.jpeg", alt: "شعر گل حسرت روی تصویر گل‌های بنفش پاییزی" }
-  // { src: "images/poem-2.jpg", alt: "توضیح کوتاه تصویر" },
-  // { src: "images/poem-3.jpg", alt: "توضیح کوتاه تصویر" },
+  { id: "1", src: "images/poem-01.jpg", poem: "baftan", alt: "شعر «هر شب خیالت را می‌بافم» از چیا شفیعی (جبار شفیعی، چیاگوران دالاهو)" },
+  { id: "2", src: "images/poem-02.jpg", poem: "jey-bele", alt: "شعر «جێ بێڵە» از چیا شفیعی (جبار شفیعی، چیاگوران دالاهو)" },
+  { id: "3", src: "images/poem-03.jpg", poem: "shen-zar", alt: "شعر «در شن‌زارِ تنهایی» از چیا شفیعی (جبار شفیعی، چیاگوران دالاهو)" },
+  { id: "4", src: "images/poem-04.jpg", poem: "ghafas", alt: "شعر «قفسِ دو میله» از چیا شفیعی (جبار شفیعی، چیاگوران دالاهو)" },
+  { id: "5", src: "images/poem-05.jpg", poem: "darya", alt: "شعر «مرا می‌کشند» از چیا شفیعی (جبار شفیعی، چیاگوران دالاهو)" },
+  { id: "6", src: "images/poem-06.jpg", poem: "par-azadi", alt: "شعر «پرِ پرواز آزادی» از چیا شفیعی (جبار شفیعی، چیاگوران دالاهو)" },
+  { id: "7", src: "images/poem-07.jpg", poem: "paeiz", alt: "شعر «پاییز که می‌آید» از چیا شفیعی (جبار شفیعی، چیاگوران دالاهو)" },
+  { id: "8", src: "images/poem-08.jpg", poem: "varagh", alt: "شعر «مرا دیگر ورق نزن» از چیا شفیعی (جبار شفیعی، چیاگوران دالاهو)" },
+  { id: "9", src: "images/poem-09.jpg", poem: "baran-tanhai", alt: "شعر «زیر باران تنهایی» از چیا شفیعی (جبار شفیعی، چیاگوران دالاهو)" },
+  { id: "10", src: "images/poem-10.jpg", poem: "mah", alt: "شعر «ماه و آفتاب‌پرستان» از چیا شفیعی (جبار شفیعی، چیاگوران دالاهو)" },
+  { id: "11", src: "images/poem-11.jpg", poem: "vaje", alt: "شعر «آخرین واژه» از چیا شفیعی (جبار شفیعی، چیاگوران دالاهو)" },
+  { id: "12", src: "images/poem-12.jpg", poem: "virani", alt: "شعر «وسعتِ ویرانی» از چیا شفیعی (جبار شفیعی، چیاگوران دالاهو)" },
+  { id: "13", src: "images/poem-13.jpg", poem: "sigar", alt: "شعر «مثل سیگار» از چیا شفیعی (جبار شفیعی، چیاگوران دالاهو)" },
+  { id: "14", src: "images/poem-14.jpg", poem: "man-o-u", alt: "شعر «من و او» از چیا شفیعی (جبار شفیعی، چیاگوران دالاهو)" },
+  { id: "15", src: "images/poem-15.jpg", poem: "vay", alt: "شعر «وای» از چیا شفیعی (جبار شفیعی، چیاگوران دالاهو)" },
+  { id: "16", src: "images/poem-16.jpg", poem: "nimkat", alt: "شعر «نیمکتِ دوتایی» از چیا شفیعی (جبار شفیعی، چیاگوران دالاهو)" },
+  { id: "17", src: "images/poem-17.jpg", poem: "ma-hame", alt: "شعر «همه‌ی ما» از چیا شفیعی (جبار شفیعی، چیاگوران دالاهو)" },
+  { id: "18", src: "images/poem-18.jpg", poem: "sitam", alt: "شعر «این جهان و آن جهان» از چیا شفیعی (جبار شفیعی، چیاگوران دالاهو)" },
+  { id: "19", src: "images/poem-19.jpg", poem: "sabr", alt: "شعر «صبر» از چیا شفیعی (جبار شفیعی، چیاگوران دالاهو)" },
+  { id: "20", src: "images/poem-20.jpg", poem: "rouh", alt: "شعر «روح، در میان تارزدگی» از چیا شفیعی (جبار شفیعی، چیاگوران دالاهو)" },
+  { id: "autumn", src: "images/autumn-poem.jpeg", poem: "poem3", alt: "شعر «گل حسرت» از چیا شفیعی (جبار شفیعی، چیاگوران دالاهو)" }
 ];
 
 (function () {
@@ -112,11 +131,13 @@ var IMAGES = [
   var lbImg = document.getElementById('lbImg');
   var count = document.getElementById('count');
   var dl = document.getElementById('dl');
+  var txt = document.getElementById('txt');
   var cur = 0, opener = null;
 
   IMAGES.forEach(function (it, i) {
     var b = document.createElement('button');
     b.type = 'button';
+    b.id = 'img-' + it.id;
     b.setAttribute('aria-label', 'نمایش بزرگ: ' + it.alt);
     var im = document.createElement('img');
     im.src = it.src; im.alt = it.alt; im.loading = 'lazy';
@@ -127,9 +148,11 @@ var IMAGES = [
 
   function show(i) {
     cur = (i + IMAGES.length) % IMAGES.length;
-    lbImg.src = IMAGES[cur].src;
-    lbImg.alt = IMAGES[cur].alt;
-    dl.href = IMAGES[cur].src;
+    var it = IMAGES[cur];
+    lbImg.src = it.src;
+    lbImg.alt = it.alt;
+    dl.href = it.src;
+    if (it.poem) { txt.href = 'poems.html#' + it.poem; txt.style.display = ''; } else { txt.style.display = 'none'; }
     count.textContent = (cur + 1) + ' / ' + IMAGES.length;
   }
   function open(i, el) {
@@ -153,6 +176,14 @@ var IMAGES = [
     if (e.key === 'ArrowLeft') show(cur + 1);   /* در صفحهٔ راست‌به‌چپ، چپ یعنی بعدی */
     if (e.key === 'ArrowRight') show(cur - 1);
   });
+
+  /* لینک مستقیم به یک تصویر: gallery.html#img-5 */
+  var m = location.hash.match(/^#img-(.+)$/);
+  if (m) {
+    for (var k = 0; k < IMAGES.length; k++) {
+      if (IMAGES[k].id === m[1]) { open(k, document.getElementById('img-' + m[1])); break; }
+    }
+  }
 })();
 </script>
 </body>
