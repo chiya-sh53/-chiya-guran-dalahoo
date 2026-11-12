@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="کتاب دومین نفر از من، نوشتهٔ جبار شفیعی (چیاگوران دالاهو)">
+<title>کتاب | Chiya Guran Dalahoo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0d1b22;
+  --mist: #d8e8e4;
+  --dim: #9db4b0;
+  --saffron: #e6b95f;
+  --line: rgba(216, 232, 228, .22);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--ink); }
+body { font-family: "Vazirmatn", Tahoma, "Segoe UI", sans-serif; color: var(--mist); line-height: 1.9; background: transparent; min-height: 100vh; }
+#bg { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; display: block; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--saffron); outline-offset: 4px; }
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+header { border-bottom: 1px solid var(--line); background: rgba(13, 27, 34, .72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); position: sticky; top: 0; z-index: 5; }
+header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 14px; padding-bottom: 14px; }
+.brand { font-weight: 800; font-size: 1.1rem; letter-spacing: .02em; direction: ltr; }
+nav ul { list-style: none; display: flex; gap: 22px; }
+nav a { color: var(--dim); padding: 4px 0; border-bottom: 2px solid transparent; }
+nav a:hover, nav a[aria-current="page"] { color: var(--mist); border-bottom-color: var(--saffron); }
+
+.book { display: grid; grid-template-columns: 260px 1fr; gap: 48px; align-items: start; padding: 72px 0 40px; }
+
+/* typographic cover */
+.cover { aspect-ratio: 5 / 7; border: 1px solid var(--saffron); background: rgba(13, 27, 34, .8); display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; padding: 34px 18px; position: relative; }
+.cover::before { content: ""; position: absolute; inset: 8px; border: 1px solid var(--line); pointer-events: none; }
+.cover .t { font-family: "Noto Naskh Arabic", "Vazirmatn", serif; font-weight: 700; font-size: 2.1rem; line-height: 1.7; margin-top: 28%; }
+.cover .a { font-size: .95rem; color: var(--dim); }
+
+.info h1 { font-size: clamp(1.8rem, 5vw, 2.7rem); font-weight: 800; line-height: 1.5; }
+.author { color: var(--saffron); font-weight: 600; margin-top: 4px; }
+.desc { margin-top: 20px; color: var(--mist); max-width: 34em; }
+.actions { margin-top: 28px; display: flex; gap: 14px; flex-wrap: wrap; }
+.btn { padding: 10px 26px; border: 1px solid var(--mist); font-weight: 600; transition: background .2s, color .2s; display: inline-block; }
+.btn:hover { background: var(--mist); color: var(--ink); }
+.btn.primary { background: var(--saffron); border-color: var(--saffron); color: var(--ink); }
+.btn.primary:hover { background: transparent; color: var(--saffron); }
+.small { margin-top: 10px; color: var(--dim); font-size: .88rem; }
+
+section { padding: 28px 0; }
+h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 16px; }
+.panel { background: rgba(13, 27, 34, .65); padding: 20px 24px; }
+
+dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 24px; }
+dt { color: var(--dim); }
+
+ol.parts { list-style: none; counter-reset: p; }
+ol.parts li { counter-increment: p; padding: 10px 0; border-bottom: 1px solid var(--line); display: flex; gap: 14px; }
+ol.parts li:last-child { border-bottom: 0; }
+ol.parts li::before { content: "بخش " counter(p, persian); color: var(--saffron); font-weight: 600; white-space: nowrap; min-width: 5.5em; }
+
+footer { border-top: 1px solid var(--line); margin-top: 48px; padding: 28px 0 40px; color: var(--dim); font-size: .9rem; background: rgba(13, 27, 34, .72); }
+@media (max-width: 680px) {
+  .book { grid-template-columns: 1fr; gap: 32px; padding-top: 40px; }
+  .cover { max-width: 260px; margin: 0 auto; width: 100%; }
+  nav ul { gap: 16px; }
+  dl { grid-template-columns: 1fr; gap: 0; }
+  dd { margin-bottom: 8px; }
+}
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="index.html">Chiya Guran Dalahoo</a>
+    <nav aria-label="منوی اصلی">
+      <ul>
+        <li><a href="index.html">خانه</a></li>
+        <li><a href="poems.html">اشعار</a></li>
+        <li><a href="writings.html">نوشته‌ها</a></li>
+        <li><a href="book.html" aria-current="page">کتاب</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="book">
+    <div class="cover" aria-hidden="true">
+      <div class="t">دومین نفر<br>از من</div>
+      <div class="a">جبار شفیعی<br>(چیاگوران دالاهو)</div>
+    </div>
+
+    <div class="info">
+      <h1>دومین نفر از من</h1>
+      <p class="author">جبار شفیعی (چیاگوران دالاهو)</p>
+      <p class="desc">کتابی دربارهٔ دوگانگی شخصیت و خودشناسی: چهره‌های روشن و تاریک وجود انسان، تأثیر محیط و جامعه بر آن‌ها، و راهی به سوی خودآگاهی و رشد فردی.</p>
+      <div class="actions">
+        <a class="btn primary" href="files/dovomin-nafar-az-man.pdf" download>دانلود کتاب (PDF)</a>
+        <a class="btn" href="files/dovomin-nafar-az-man.pdf" target="_blank" rel="noopener">خواندن آنلاین</a>
+      </div>
+      <p class="small">فایل PDF، ۸۵ صفحه، حدود ۵۵۰ کیلوبایت</p>
+    </div>
+  </div>
+
+  <section>
+    <h2>مشخصات کتاب</h2>
+    <div class="panel">
+      <dl>
+        <dt>نویسنده</dt><dd>جبار شفیعی (چیاگوران دالاهو)</dd>
+        <dt>ناشر</dt><dd>انتشارات عاصم، تبریز</dd>
+        <dt>نوبت چاپ</dt><dd>اول، ۱۴۰۴</dd>
+        <dt>تعداد صفحات</dt><dd>۸۵ صفحه</dd>
+        <dt>شابک</dt><dd dir="ltr" style="text-align:right">978-622-331-897-9</dd>
+        <dt>موضوع</dt><dd>شخصیت چندگانه، خودشناسی</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section>
+    <h2>بخش‌های کتاب</h2>
+    <div class="panel">
+      <ol class="parts">
+        <li>چهره‌های سیاه و سفید</li>
+        <li>شخصیت انسان</li>
+        <li>تحول در شناخت خود: سفری به سوی خودآگاهی و رشد شخصی</li>
+        <li>دگرگونی رفتار انسان: بررسی دوگانگی رفتار در سطح فردی و گروهی</li>
+        <li>سنت‌ها و محدودیت‌ها در جوامع قومی و مذهبی: ریشه‌ها، تأثیرات و چالش‌ها</li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© ۱۴۰۴ جبار شفیعی (چیاگوران دالاهو)، تمامی حقوق محفوظ است</div>
+</footer>
+
+<script>
+(function () {
+  var c = document.getElementById('bg');
+  var x = c.getContext('2d');
+  var w = 0, h = 0, pts = [];
+  var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var NET = '111,183,168';
+  function resize() {
+    var d = window.devicePixelRatio || 1;
+    w = window.innerWidth; h = window.innerHeight;
+    c.width = w * d; c.height = h * d;
+    x.setTransform(d, 0, 0, d, 0, 0);
+    var n = Math.min(90, Math.floor(w * h / 14000));
+    pts = [];
+    for (var i = 0; i < n; i++) {
+      pts.push({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - .5) * .4, vy: (Math.random() - .5) * .4 });
+    }
+    if (still) draw();
+  }
+  function draw() {
+    x.clearRect(0, 0, w, h);
+    var i, j, a, b, d;
+    for (i = 0; i < pts.length; i++) {
+      a = pts[i];
+      if (!still) {
+        a.x += a.vx; a.y += a.vy;
+        if (a.x < 0 || a.x > w) a.vx *= -1;
+        if (a.y < 0 || a.y > h) a.vy *= -1;
+      }
+    }
+    for (i = 0; i < pts.length; i++) {
+      a = pts[i];
+      x.fillStyle = 'rgba(' + NET + ',.85)';
+      x.beginPath(); x.arc(a.x, a.y, 2, 0, 6.283); x.fill();
+      for (j = i + 1; j < pts.length; j++) {
+        b = pts[j];
+        d = Math.hypot(a.x - b.x, a.y - b.y);
+        if (d < 140) {
+          x.strokeStyle = 'rgba(' + NET + ',' + ((1 - d / 140) * .35) + ')';
+          x.beginPath(); x.moveTo(a.x, a.y); x.lineTo(b.x, b.y); x.stroke();
+        }
+      }
+    }
+    if (!still) requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+  if (!still) draw();
+})();
+</script>
+</body>
+</html>
