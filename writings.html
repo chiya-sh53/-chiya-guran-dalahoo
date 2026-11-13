@@ -1,88 +1,105 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نوشته‌ها | Chiya Guran Dalahoo</title>
-    <meta name="description" content="یادداشت‌ها، داستان‌ها و نوشته‌های ادبی">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="داستان‌های کوتاه، یادداشت‌ها و تأملات ادبی چیا شفیعی، جبار شفیعی (چیاگوران دالاهو)">
+<title>نوشته‌ها | چیا شفیعی (چیاگوران دالاهو)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0d1b22;
+  --mist: #d8e8e4;
+  --dim: #9db4b0;
+  --saffron: #e6b95f;
+  --line: rgba(216, 232, 228, .22);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--ink); scroll-padding-top: 80px; scroll-behavior: smooth; }
+body { font-family: "Vazirmatn", Tahoma, "Segoe UI", sans-serif; color: var(--mist); line-height: 2; background: transparent; min-height: 100vh; }
+#bg { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; display: block; }
+a { color: inherit; text-decoration: none; }
+a:focus-visible { outline: 2px solid var(--saffron); outline-offset: 4px; }
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+header { border-bottom: 1px solid var(--line); background: rgba(13, 27, 34, .72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); position: sticky; top: 0; z-index: 5; }
+header .wrap { max-width: 880px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 14px; padding-bottom: 14px; }
+.brand { font-weight: 800; font-size: 1.1rem; letter-spacing: .02em; direction: ltr; }
+nav ul { list-style: none; display: flex; gap: 22px; flex-wrap: wrap; }
+nav a { color: var(--dim); padding: 4px 0; border-bottom: 2px solid transparent; }
+nav a:hover, nav a[aria-current="page"] { color: var(--mist); border-bottom-color: var(--saffron); }
+
+.page-title { padding: 64px 0 16px; }
+.page-title h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 800; }
+.page-title p { color: var(--dim); margin-top: 8px; }
+
+.toc { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 8px 0 24px; padding: 14px 18px; background: rgba(13, 27, 34, .65); border-top: 2px solid var(--saffron); }
+.toc a:hover { color: var(--saffron); }
+
+.piece { border-inline-start: 3px solid var(--saffron); padding: 14px 24px 22px; margin: 28px 0 44px; background: rgba(13, 27, 34, .65); }
+.piece h2 { font-size: 1.4rem; font-weight: 800; }
+.meta { color: var(--dim); font-size: .9rem; margin-bottom: 12px; }
+.piece p { margin-top: 12px; font-size: 1.08rem; }
+.poet { color: var(--dim); font-size: .95rem; }
+
+footer { border-top: 1px solid var(--line); margin-top: 48px; padding: 28px 0 40px; color: var(--dim); font-size: .9rem; background: rgba(13, 27, 34, .72); }
+footer .wrap { max-width: 880px; }
+@media (max-width: 560px) { nav ul { gap: 14px; } .piece { padding-inline: 16px; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
 </head>
 <body>
-    <header>
-        <div class="nav-container">
-            <a href="index.html" class="logo">Chiya <span>Guran</span> Dalahoo</a>
-            <button class="menu-toggle" aria-label="منو">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav>
-                <ul id="nav-menu">
-                    <li><a href="index.html">خانه</a></li>
-                    <li><a href="poems.html">اشعار</a></li>
-                    <li><a href="writings.html" class="active">نوشته‌ها</a></li>
-                    <li><a href="book.html">کتاب</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<canvas id="bg" aria-hidden="true"></canvas>
 
-    <main>
-        <div class="section-title">
-            <h2>نوشته‌ها</h2>
-            <p>داستان‌های کوتاه، یادداشت‌ها و تأملات ادبی</p>
-        </div>
+<header>
+  <div class="wrap">
+    <a class="brand" href="index.html">Chiya Guran Dalahoo</a>
+    <nav aria-label="منوی اصلی">
+      <ul>
+        <li><a href="index.html">خانه</a></li>
+        <li><a href="poems.html">اشعار</a></li>
+        <li><a href="gallery.html">تصاویر</a></li>
+        <li><a href="writings.html" aria-current="page">نوشته‌ها</a></li>
+        <li><a href="book.html">کتاب</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-        <div class="item-list">
-            <div class="item">
-                <h3>کافهٔ گوشه خیابان</h3>
-                <div class="meta">داستان کوتاه · آبان ۱۴۰۳</div>
-                <div class="excerpt">
-                    هر بعدازظهر ساعت چهار، پیرمردی با کت قهوه‌ای کهنه‌اش می‌آمد و پشت همان میز کنار پنجره می‌نشست. قهوه را تلخ می‌خواست و هیچ‌وقت شکر نمی‌ریخت. من که تازه کارم را شروع کرده بودم، فکر می‌کردم شاید غمگین است. تا اینکه یک روز دفترچهٔ کوچکش را باز کرد و شروع کرد به نوشتن...
-                </div>
-                <a href="#" class="read-more">ادامه مطلب ←</a>
-            </div>
+<main class="wrap">
+  <div class="page-title">
+    <h1>نوشته‌ها</h1>
+    <p>داستان‌های کوتاه، یادداشت‌ها و تأملات ادبی</p>
+  </div>
 
-            <div class="item">
-                <h3>دربارهٔ نوشتن در تنهایی</h3>
-                <div class="meta">یادداشت · مهر ۱۴۰۳</div>
-                <div class="excerpt">
-                    نوشتن در تنهایی مثل حرف زدن با کسی است که همیشه گوش می‌دهد و هیچ‌وقت قضاوت نمی‌کند. کاغذ سفید، صادق‌ترین مخاطب دنیا است. گاهی فکر می‌کنم بهترین حرف‌هایم را فقط به کاغذ گفته‌ام؛ حرف‌هایی که اگر بلند بگویم، شاید دیگر آن‌قدر واقعی نباشند.
-                </div>
-                <a href="#" class="read-more">ادامه مطلب ←</a>
-            </div>
+  <ul class="toc" aria-label="فهرست نوشته‌ها">
+    <li><a href="#cafe">کافهٔ گوشه خیابان</a></li>
+    <li><a href="#tanhai">دربارهٔ نوشتن در تنهایی</a></li>
+  </ul>
 
-            <div class="item">
-                <h3>شهر در باران</h3>
-                <div class="meta">نثر ادبی · شهریور ۱۴۰۳</div>
-                <div class="excerpt">
-                    وقتی باران می‌بارد، شهر چهره‌اش را عوض می‌کند. چراغ‌ها در گودال‌های آب می‌رقصند و مردم عجله‌شان را کنار می‌گذارند. من دوست دارم در چنین روزهایی راه بروم؛ بدون مقصد، فقط برای اینکه ببینم قطرات باران چطور روی شیشه‌ها داستان می‌نویسند.
-                </div>
-                <a href="#" class="read-more">ادامه مطلب ←</a>
-            </div>
+  <!-- برای افزودن نوشتهٔ جدید: یک بخش article کامل را کپی کنید، id و متن را عوض کنید و یک خط هم به فهرست بالا اضافه کنید -->
 
-            <div class="item">
-                <h3>نامه‌ای که فرستاده نشد</h3>
-                <div class="meta">داستان کوتاه · مرداد ۱۴۰۳</div>
-                <div class="excerpt">
-                    آن نامه را سه بار نوشتم و سه بار پاره کردم. بار چهارم فقط نشستم و نگاهش کردم. کلمات درست بودند، اما احساس کردم اگر بفرستم، دیگر مال من نیستند. پس توی کشو گذاشتمش. هنوز هم آنجاست.
-                </div>
-                <a href="#" class="read-more">ادامه مطلب ←</a>
-            </div>
-        </div>
+  <article class="piece" id="cafe">
+    <h2>کافهٔ گوشه خیابان</h2>
+    <p class="meta">داستان کوتاه · آبان ۱۴۰۳</p>
+    <p>هر بعدازظهر ساعت چهار، پیرمردی با کتِ قهوه‌ای کهنه‌اش می‌آمد و پشت همان میز کنار پنجره می‌نشست. قهوه را تلخ می‌خواست و هیچ‌وقت شکر نمی‌ریخت. من که تازه کارم را شروع کرده بودم، فکر می‌کردم شاید غمگین است. تا اینکه یک روز دفترچهٔ کوچکش را باز کرد و شروع کرد به نوشتن…</p>
+    <p class="poet">جبار شفیعی (چیاگوران دالاهو)</p>
+  </article>
 
-        <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: var(--bg-secondary); border-radius: var(--radius);">
-            <p style="color: var(--text-soft); margin-bottom: 1rem;">
-                <i class="fas fa-info-circle"></i>
-                این نوشته‌ها نمونه هستند. شما می‌توانید متن‌های خودتان را جایگزین کنید.
-            </p>
-        </div>
-    </main>
+  <article class="piece" id="tanhai">
+    <h2>دربارهٔ نوشتن در تنهایی</h2>
+    <p class="meta">یادداشت · مهر ۱۴۰۳</p>
+    <p>نوشتن در تنهایی مثل حرف زدن با کسی است که همیشه گوش می‌دهد و هیچ‌وقت قضاوت نمی‌کند. کاغذ سفید، صادق‌ترین مخاطب دنیا است. گاهی فکر می‌کنم بهترین حرف‌هایم را فقط به کاغذ گفته‌ام؛ حرف‌هایی که اگر بلند بگوییم، شاید دیگر آن‌قدر واقعی نباشند.</p>
+    <p class="poet">جبار شفیعی (چیاگوران دالاهو)</p>
+  </article>
+</main>
 
-    <footer>
-        <p>© ۱۴۰۳ · Chiya Guran Dalahoo</p>
-        <p>تمامی حقوق محفوظ است</p>
-    </footer>
+<footer>
+  <div class="wrap">© ۱۴۰۴ جبار شفیعی (چیاگوران دالاهو)، تمامی حقوق محفوظ است</div>
+</footer>
 
-    <script src="js/main.js"></script>
+<script src="bg.js"></script>
 </body>
 </html>
