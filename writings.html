@@ -42,8 +42,11 @@ nav a:hover, nav a[aria-current="page"] { color: var(--mist); border-bottom-colo
 .piece h2 { font-size: 1.4rem; font-weight: 800; }
 .meta { color: var(--dim); font-size: .9rem; margin-bottom: 12px; }
 .piece p { margin-top: 12px; font-size: 1.08rem; }
+.more { color: var(--saffron); font-weight: 600; }
+.more:hover { text-decoration: underline; text-underline-offset: 4px; }
 .poet { color: var(--dim); font-size: .95rem; }
 
+footer a { color: var(--saffron); }
 footer { border-top: 1px solid var(--line); margin-top: 48px; padding: 28px 0 40px; color: var(--dim); font-size: .9rem; background: rgba(13, 27, 34, .72); }
 footer .wrap { max-width: 880px; }
 @media (max-width: 560px) { nav ul { gap: 14px; } .piece { padding-inline: 16px; } }
@@ -75,11 +78,20 @@ footer .wrap { max-width: 880px; }
   </div>
 
   <ul class="toc" aria-label="فهرست نوشته‌ها">
+    <li><a href="khod-agahi.html">خودآگاهی (مقاله)</a></li>
     <li><a href="#cafe">کافهٔ گوشه خیابان</a></li>
     <li><a href="#tanhai">دربارهٔ نوشتن در تنهایی</a></li>
   </ul>
 
   <!-- برای افزودن نوشتهٔ جدید: یک بخش article کامل را کپی کنید، id و متن را عوض کنید و یک خط هم به فهرست بالا اضافه کنید -->
+
+  <article class="piece" id="khod-agahi">
+    <h2>خودآگاهی: سیزده عاملی که از کنترل شما خارج است</h2>
+    <p class="meta">مقاله · شامل بخش «ذهن‌آگاهی (Mindfulness)»</p>
+    <p>در زندگی، بسیاری از ما با مسائلی دست‌وپنجه نرم می‌کنیم که خارج از کنترلمان هستند، اما تأثیر عمیقی بر ذهن، روان و حتی جسم ما می‌گذارند. این عوامل، مانند سایه‌هایی نامرئی، می‌توانند آرامش درونی ما را مختل کنند…</p>
+    <p><a class="more" href="khod-agahi.html">خواندن مقالهٔ کامل ←</a></p>
+    <p class="poet">جبار شفیعی (چیاگوران دالاهو)</p>
+  </article>
 
   <article class="piece" id="cafe">
     <h2>کافهٔ گوشه خیابان</h2>
@@ -97,7 +109,7 @@ footer .wrap { max-width: 880px; }
 </main>
 
 <footer>
-  <div class="wrap">© ۱۴۰۴ جبار شفیعی (چیاگوران دالاهو)، تمامی حقوق محفوظ است</div>
+  <div class="wrap">© ۱۴۰۴ جبار شفیعی (چیاگوران دالاهو)، تمامی حقوق محفوظ است · <a href="https://www.instagram.com/chiya.shafiei/" target="_blank" rel="noopener me">اینستاگرام @chiya.shafiei</a></div>
 </footer>
 
 <script src="bg.js"></script>
